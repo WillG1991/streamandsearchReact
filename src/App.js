@@ -3,7 +3,6 @@ import "./App.css";
 import StreamingWhere from "./components/StreamingWhere";
 import MovieDetails from "./components/MovieDetails";
 
-
 function App() {
   const [movieTitle, setMovieTitle] = useState("");
   const [movieInfo, setMovieInfo] = useState({});
@@ -29,7 +28,9 @@ function App() {
         .then(response => response.json())
         .then((response) => {
           console.log(response);
-          setMovieInfo({ ...data, streamingData: response.locations });
+          setMovieInfo({ ...data, streamingData: response.streamingInfo });
+          console.log(response.streamingInfo)
+          
         });
       
     } catch (error) {
@@ -45,6 +46,10 @@ function App() {
   const handleChange = (e) => {
     setMovieTitle(e.target.value);
   };
+
+
+
+
 
   return (
     <div className="App">
@@ -82,8 +87,7 @@ function App() {
       <MovieDetails
         title={movieInfo.Title}
         posterURLs={{ 500: movieInfo.Poster }}
-        streamingInfo={movieInfo.streamingData}
-        tagline={movieInfo.Plot}
+        streamingInfo={movieInfo.streamingData} // pass the streamingInfo data from the second API
         plot={movieInfo.Plot}
         genre={movieInfo.Genre}
         director={movieInfo.Director}
@@ -91,7 +95,7 @@ function App() {
       />
 
       {movieTitle && (
-        <StreamingWhere />
+        <StreamingWhere streamingInfo={movieInfo.streamingData} /> // pass the streamingInfo data to the StreamingWhere component
       )}
     </div>
   );

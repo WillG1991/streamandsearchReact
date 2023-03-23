@@ -1,9 +1,20 @@
 import React from 'react';
 import { Typography, Box, Card, CardMedia, CardContent } from '@mui/material';
+import StreamingWhere from '../StreamingWhere'; // import the StreamingWhere component
+
 
 const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, director, runtime }) => {
+    console.log(streamingInfo);
   const poster = posterURLs ? posterURLs['500'] : ''; // using 500 size for poster image
   const streamingServices = streamingInfo ? Object.keys(streamingInfo) : [];
+
+  for (const service in streamingInfo) {
+    console.log(service);    
+  }
+  for (const service in streamingInfo) {
+    console.log(`${service}: ${streamingInfo[service]["us"].link}`);
+  }
+
   
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -20,9 +31,6 @@ const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, 
             {plot}
           </Typography>
           <Box sx={{ mt: 2 }}>
-            <Typography variant="body2" color="text.secondary">
-              Available on: {streamingServices.join(', ')}
-            </Typography>
           </Box>
         </CardContent>
       </Card>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-
+import StreamingService from '../StreamingService';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,58 +20,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const StreamingWhere = ({ title, children }) => {
+const StreamingWhere = ({ streamingInfo }) => {
   const classes = useStyles();
-  const [streamingData, setStreamingData] = useState([]);
+  const [streamingService, setStreamingService] = useState(null);
 
+  useEffect(() => {
+    if (streamingInfo) {
+      // Check if the streaming service is Netflix, HBO, Prime Video, Apple TV+, or Disney+
+      if (streamingInfo.netflix) {
+        setStreamingService('netflix');
+      } else if (streamingInfo.hbo) {
+        setStreamingService('hbo');
+      } else if (streamingInfo.prime) {
+        setStreamingService('prime');
+      } else if (streamingInfo.apple) {
+        setStreamingService('apple');
+      } else if (streamingInfo.disney) {
+        setStreamingService('disney');
+      } else {
+        setStreamingService(null);
+      }
+    } else {
+      setStreamingService(null);
+    }
+  }, [streamingInfo])
+  console.log(streamingInfo);
 
   return (
-    <section className="testimonials streamingWhere text-center bg-dark">
-    <div className="column">
-    <h2 className="mb-5">Where it's streaming:</h2>
-    <div id="button-remove" className="columns">
-    <StreamingService title={title} service="Netflix" streamingData={streamingData} />
-    <StreamingService title={title} service="Prime" streamingData={streamingData} />
-    <StreamingService title={title} service="Disney" streamingData={streamingData} />
-    <StreamingService title={title} service="Apple" streamingData={streamingData} />
-    <StreamingService title={title} service="Hulu" streamingData={streamingData} />
-    <StreamingService title={title} service="HBO" streamingData={streamingData} />
+    <div className={classes.root}>
+      <h2 className="mb-5">Where it's streaming:</h2>
+      {streamingService && (
+<StreamingService name={streamingService} />
+      )}
     </div>
-    {children && children(streamingData)}
-    </div>
-    </section>
-    );
-    };
-    
-    const StreamingService = ({ title, service, streamingData }) => {
-    const [streamingInfo, setStreamingInfo] = useState(null);
-    
-    useEffect(() => {
-    setStreamingInfo(streamingData.find(loc => loc.name.toLowerCase().includes(service.toLowerCase())));
-    }, [service, streamingData]);
-    
-    return (
-    <div className="col-lg-2">
-    <div className="testimonial-item mx-auto mb-5 mb-lg-0 iconSmaller">
-    <img src={`./assets/img/${service.toLowerCase()}.svg`} className="img-fluid rounded-circle mb-3" alt="..." />
+  );
+};
 
-
-<div className="column is-size-5 is-underlined">
-    {service}:
-    <div className="streamingNetflix">
-    {streamingInfo ? (
-    <a href={streamingInfo.url} target="_blank" rel="noopener noreferrer">
-    {streamingInfo.display_name}
-    </a>
-    ) : (
-    ''
-    )}
-    </div>
-    </div>
-    </div>
-    </div>
-    );
-    };
-    
-    export default StreamingWhere;
-
+export default StreamingWhere;
