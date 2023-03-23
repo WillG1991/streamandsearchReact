@@ -48,6 +48,8 @@ const StreamingService = ({ name, link }) => {
 
   const iconSrc = getIcon(name);
 
+  
+
   return (
     <div className={classes.root}>
       <img src={iconSrc} className={classes.icon} alt={`${name} logo`} />

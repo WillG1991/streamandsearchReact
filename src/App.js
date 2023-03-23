@@ -92,11 +92,7 @@ function App() {
         genre={movieInfo.Genre}
         director={movieInfo.Director}
         runtime={movieInfo.Runtime}
-      />
-
-      {movieTitle && (
-        <StreamingWhere streamingInfo={movieInfo.streamingData} /> // pass the streamingInfo data to the StreamingWhere component
-      )}
+      />  
     </div>
   );
 }
