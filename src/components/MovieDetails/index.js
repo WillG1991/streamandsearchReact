@@ -1,6 +1,5 @@
 import React from 'react';
 import { Typography, Box, Card, CardMedia, CardContent } from '@mui/material';
-import StreamingWhere from '../StreamingWhere'; // import the StreamingWhere component
 import StreamingService from '../StreamingService'; // import the StreamingService component
 
 const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, director, runtime }) => {
