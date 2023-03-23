@@ -5,12 +5,13 @@ import netflixIcon from "../../assets/img/netflix.png"
 import hboIcon from "../../assets/img/hbo.png"
 import disneyIcon from "../../assets/img/disney.png"
 import amazonIcon from "../../assets/img/amazon.png"
-
+import appleIcon from "../../assets/img/apple.png"
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center', // added to center horizontally
     marginBottom: theme.spacing(1),
   },
   icon: {
@@ -37,13 +38,9 @@ const StreamingService = ({ name, link }) => {
       case 'disney':
         return disneyIcon;
       case 'apple':
-        return '/assets/img/apple-tv.svg';
+        return appleIcon;
       case 'hbo':
         return hboIcon;
-      case 'showtime':
-        return '/assets/img/showtime.svg';
-      case 'paramount':
-        return '/assets/img/paramount-plus.svg';
       default:
         return null;
     }
