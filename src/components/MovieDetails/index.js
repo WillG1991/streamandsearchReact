@@ -20,15 +20,23 @@ const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, 
           <Typography variant="body2" color="text.secondary">
             {plot}
           </Typography>
-          <Box sx={{ mt: 2 }}>
-            {streamingServices.map((service) => (
-              <StreamingService
-                key={service}
-                name={service}
-                link={streamingInfo[service]["us"].link}
-              />
-            ))}
-          </Box>
+          {streamingServices.length > 0 ? (
+            <Box sx={{ mt: 2 }}>
+              {streamingServices.map((service) => (
+                <StreamingService
+                  key={service}
+                  name={service}
+                  link={streamingInfo[service]["us"].link}
+                />
+              ))}
+            </Box>
+          ) : (
+            <Box sx={{ mt: 2 }}>
+              <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 'bold' }}>
+    Streaming info not available
+  </Typography>
+            </Box>
+          )}
         </CardContent>
       </Card>
       <Box sx={{ mt: 3 }}>
