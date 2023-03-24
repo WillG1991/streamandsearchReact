@@ -31,6 +31,7 @@ function App() {
   const [movieTitle, setMovieTitle] = useState("");
   const [movieInfo, setMovieInfo] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
 
   const searchMovie = async () => {
     try {
@@ -82,61 +83,63 @@ function App() {
     setIsModalOpen(false);
   };
 
-  return (
-    <div className="App">
-      <section className="section">
-        <div className="container">
-          <div className="columns">
-            <div className="column is-8 is-offset-2">
-              <h1 className="title is-1">Search & Stream</h1>
-              <h2 className="subtitle">
-                You search it, we'll tell you where it streams.
-              </h2>
-              <form onSubmit={handleSubmit}>
-                  <div className="control is-expanded">
-                    <input
-                      className="input is-medium"
-                      type="text"
-                      placeholder="Enter a movie or TV show title"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="control">
-                    <button className="button is-primary is-medium">
-                      Search
-                    </button>
-                    </div>
-          </form>
+return (
+  <div className="App">
+    <section className="section">
+      <div className="container">
+        <div className="columns">
+          <div className="column is-8 is-offset-2">
+            <h1 className="title is-1">Search & Stream</h1>
+            <h2 className="subtitle">
+              You search it, we'll tell you where it streams.
+            </h2>
+            <form onSubmit={handleSubmit}>
+              <div className="control is-expanded">
+                <input
+                  className="input is-medium"
+                  type="text"
+                  placeholder="Enter a movie or TV show title"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="control">
+                <button className="button is-primary is-medium">
+                  Search
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
+    {movieInfo.Title ? (
+      <MovieDetails
+        title={movieInfo.Title}
+        posterURLs={{ 500: movieInfo.Poster }}
+        streamingInfo={movieInfo.streamingData}
+        plot={movieInfo.Plot}
+        genre={movieInfo.Genre}
+        director={movieInfo.Director}
+        runtime={movieInfo.Runtime}
+      />
+    ) : null}
 
-  <MovieDetails
-    title={movieInfo.Title}
-    posterURLs={{ 500: movieInfo.Poster }}
-    streamingInfo={movieInfo.streamingData} // pass the streamingInfo data from the second API
-    plot={movieInfo.Plot}
-    genre={movieInfo.Genre}
-    director={movieInfo.Director}
-    runtime={movieInfo.Runtime}
-  />  
-
-  {/* Modal to display movie not found message */}
-  <Modal
-  isOpen={isModalOpen}
-  onRequestClose={closeModal}
-  contentLabel="Movie not found"
-  className="modal"
-  overlayClassName="overlay"
-  style={customStyles}
->
-  <h2 className="modal-title">Movie not found</h2>
-  <p className="modal-message">Check spelling and please try again!</p>
-  <button className="modal-button" onClick={closeModal}>OK</button>
-</Modal>
-</div>
+    <Modal
+      isOpen={isModalOpen}
+      onRequestClose={closeModal}
+      contentLabel="Movie not found"
+      className="modal"
+      overlayClassName="overlay"
+      style={customStyles}
+    >
+      <h2 className="modal-title">Movie not found</h2>
+      <p className="modal-message">Check spelling and please try again!</p>
+      <button className="modal-button" onClick={closeModal}>
+        OK
+      </button>
+    </Modal>
+  </div>
 );
 }
 

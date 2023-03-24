@@ -33,7 +33,7 @@ const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, 
           ) : (
             <Box sx={{ mt: 2 }}>
               <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 'bold' }}>
-    Streaming info not available
+    Streaming Info Not Available
   </Typography>
             </Box>
           )}
