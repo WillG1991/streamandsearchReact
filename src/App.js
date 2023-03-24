@@ -47,10 +47,12 @@ function App() {
         const options = {
           method: 'GET',
           headers: {
-            'X-RapidAPI-Key': '89c588b05bmsh60e709fda358096p14890cjsn1969f0e5a15f',
+            'X-RapidAPI-Key': process.env.REACT_APP_X_RAPIDAPI_KEY,
             'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
           }
         };
+
+        
         
         fetch(`https://streaming-availability.p.rapidapi.com/get/basic?country=us&imdb_id=${data.imdbID}&output_language=en`, options)
           .then(response => response.json())
