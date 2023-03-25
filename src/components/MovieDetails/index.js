@@ -11,7 +11,7 @@ const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, 
       <Typography variant="h3" sx={{ mt: 3 }}>
         {title}
       </Typography>
-      <Card sx={{ maxWidth: 500, mt: 3 }}>
+      <Card sx={{ maxWidth: 350, mt: 3 }}>
         <CardMedia component="img" image={poster} alt={title} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
