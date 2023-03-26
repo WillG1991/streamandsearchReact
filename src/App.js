@@ -84,6 +84,11 @@ const saveMovie = (movie) => {
   localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
 };
 
+const removeMovie = (movie) => {
+  const updatedSavedMovies = savedMovies.filter((m) => m.imdbID !== movie.imdbID);
+  setSavedMovies(updatedSavedMovies);
+  localStorage.setItem("savedMovies", JSON.stringify(updatedSavedMovies));
+};
 
   
 
@@ -196,7 +201,7 @@ return (
     ) : null}
 
     {/* Render the SavedMovies component */}
-    <SavedMovies savedMovies={savedMovies} />
+    <SavedMovies savedMovies={savedMovies} onRemoveMovie={removeMovie} />
         <Modal    isOpen={isModalOpen}
       onRequestClose={closeModal}
       contentLabel="Movie not found"
