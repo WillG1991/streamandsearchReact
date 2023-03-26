@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Box, Card, CardMedia, CardContent } from '@mui/material';
+import { Typography, Box, Card, CardMedia, CardContent, Button } from '@mui/material';
 import StreamingService from '../StreamingService'; // import the StreamingService component
 
 const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, director, runtime, onSave }) => {
@@ -38,7 +38,11 @@ const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, 
               </Typography>
             </Box>
           )}
-<button onClick={() => { onSave({ title, posterURLs, streamingInfo, tagline, plot, genre, director, runtime }); console.log({ title, posterURLs, streamingInfo, tagline, plot, genre, director, runtime }) }}>Save</button>
+          <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
+            <Button variant="contained" color="primary" onClick={() => { onSave({ title, posterURLs, streamingInfo, tagline, plot, genre, director, runtime }); console.log({ title, posterURLs, streamingInfo, tagline, plot, genre, director, runtime }) }}>
+              Save
+            </Button>
+          </Box>
         </CardContent>
       </Card>
       <Box sx={{ mt: 3 }}>

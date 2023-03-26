@@ -6,6 +6,7 @@ import hboIcon from "../../assets/img/hbo.png"
 import disneyIcon from "../../assets/img/disney.png"
 import amazonIcon from "../../assets/img/amazon.png"
 import appleIcon from "../../assets/img/apple.png"
+import huluIcon from "../../assets/img/hulu.png"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,6 +42,8 @@ const StreamingService = ({ name, link }) => {
         return appleIcon;
       case 'hbo':
         return hboIcon;
+        case 'hulu':
+          return huluIcon;
       default:
         return null;
     }
