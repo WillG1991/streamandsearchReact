@@ -12,18 +12,20 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center', // added to center horizontally
+    justifyContent: 'center',
     marginBottom: theme.spacing(1),
+    flexDirection: 'column', // added to center icon and text vertically
   },
   icon: {
-    marginRight: theme.spacing(1),
     width: 30,
     height: 30,
+    marginBottom: theme.spacing(0.5), // added to separate icon from text
   },
   link: {
     textDecoration: 'none',
     color: theme.palette.primary.main,
     fontWeight: 'bold',
+    textAlign: 'center', // added to center the text horizontally
   },
 }));
 
@@ -42,8 +44,8 @@ const StreamingService = ({ name, link }) => {
         return appleIcon;
       case 'hbo':
         return hboIcon;
-        case 'hulu':
-          return huluIcon;
+      case 'hulu':
+        return huluIcon;
       default:
         return null;
     }
@@ -53,14 +55,12 @@ const StreamingService = ({ name, link }) => {
 
   return (
     <div className={classes.root}>
-      <img src={iconSrc} className={classes.icon} alt={`${name} logo`} />
-      <Typography variant="body1">
-        Available on{' '}
-        <a href={link} target="_blank" rel="noreferrer" className={classes.link}>
-          {name}
-        </a>{' '}
-        in the US
-      </Typography>
+      <a href={link} target="_blank" rel="noreferrer" className={classes.link}>
+        <img src={iconSrc} className={classes.icon} alt={`${name} logo`} />
+        <Typography variant="body1">
+          Available on {name}
+        </Typography>
+      </a>
     </div>
   );
 };

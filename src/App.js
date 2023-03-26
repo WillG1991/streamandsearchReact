@@ -127,6 +127,7 @@ const searchMovie = async () => {
   }
 };
 
+
 // Define function to handle form submission
 const handleSubmit = (e) => {
   e.preventDefault();
