@@ -22,6 +22,20 @@ const SavedMovies = ({ savedMovies, onRemoveMovie }) => {
               <Typography variant="body2" color="text.secondary">
                 {movie.Plot}
               </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {movie.Plot}
+              </Typography>
+{Object.keys(movie.streamingData).map((streamingService) => {
+  console.log(movie.streamingData[streamingService]);
+  return (
+    <Typography key={streamingService}>
+      <a href={movie.streamingData[streamingService].us.link} target="_blank" rel="noreferrer">
+        {streamingService}
+      </a>
+    </Typography>
+  );
+})}
+
             </CardContent>
           </Card>
         );
