@@ -2,7 +2,8 @@ import React from 'react';
 import { Typography, Box, Card, CardMedia, CardContent } from '@mui/material';
 import StreamingService from '../StreamingService'; // import the StreamingService component
 
-const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, director, runtime }) => {
+const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, director, runtime, onSave }) => {
+  console.log(onSave);
   const poster = posterURLs ? posterURLs['500'] : ''; // using 500 size for poster image
   const streamingServices = streamingInfo ? Object.keys(streamingInfo) : [];
 
@@ -37,6 +38,7 @@ const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, 
               </Typography>
             </Box>
           )}
+<button onClick={() => { onSave({ title, posterURLs, streamingInfo, tagline, plot, genre, director, runtime }); console.log({ title, posterURLs, streamingInfo, tagline, plot, genre, director, runtime }) }}>Save</button>
         </CardContent>
       </Card>
       <Box sx={{ mt: 3 }}>
