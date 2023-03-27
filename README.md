@@ -1,6 +1,6 @@
 # Search & Stream App
 
-This is a React-based application that allows users to search for a movie or TV show title and find out where it can be streamed. It utilizes the Open Movie Database (OMDb) API to fetch movie information and the Streaming Availability API to get streaming data for the movie.
+This React-based app lets users search for a movie or TV show and find out where it can be streamed. It uses the OMDb and Streaming Availability APIs to fetch movie information and streaming data. Additionally, the app uses local storage to allow users to add and remove favorite movies for future reference.
 
 ## Installation
 
