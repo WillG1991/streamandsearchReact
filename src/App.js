@@ -14,6 +14,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import MovieDetails from "./components/MovieDetails";
 import SavedMovies from "./components/SavedMovies";
 import Modal from "react-modal";
+import { useMediaQuery } from '@material-ui/core';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
 function App() {
   // Declare state variables for movie title, movie info, and modal open status
   const [movieTitle, setMovieTitle] = useState("");
@@ -67,6 +70,17 @@ function App() {
   );
 
   console.log('Saved movies:', savedMovies);
+
+
+  const matches = useMediaQuery('(max-width: 600px)');
+
+const searchStreamStyle = {
+  fontSize: matches ? '2rem' : '4rem',
+};
+
+const searchStreamStyles = {
+  fontSize: matches ? '1rem' : '3rem',
+};
 
  // Retrieve saved movies from local storage when the component mounts
  useEffect(() => {
@@ -163,12 +177,12 @@ return (
       <Container>
         <Grid container justifyContent="center">
           <Grid item xs={12} md={8}>
-            <Typography variant="h1" align="center" gutterBottom>
-              Search & Stream
-            </Typography>
-            <Typography variant="h4" align="center" gutterBottom>
-              You search it, we'll tell you where it streams.
-            </Typography>
+          <Typography variant="h1" align="center" gutterBottom style={searchStreamStyle}>
+  Search & Stream
+</Typography>
+<Typography variant="h4" align="center" gutterBottom style={searchStreamStyles}>
+  You search it, we'll tell you where it streams.
+</Typography>
             <form onSubmit={handleSubmit}>
               <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column">
                 <TextField
@@ -211,10 +225,12 @@ return (
     ) : null}
 
     {/* Render the SavedMovies component */}
-    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Typography gutterBottom variant="h5" component="div" align="center" sx={{ pt: 10 }}>
-            Your Saved Movies:
-          </Typography>
+    <br></br>
+    <br></br>
+     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+     <Typography gutterBottom variant="h5" component="div" align="center" sx={{ mt: 5 }}>
+  Your Saved Movies:
+</Typography>
         </Box>
     <SavedMovies savedMovies={savedMovies} onRemoveMovie={removeMovie} />
         <Modal    isOpen={isModalOpen}

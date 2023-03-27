@@ -40,11 +40,7 @@ const SavedMovies = ({ savedMovies, onRemoveMovie }) => {
   return (
     <Box sx={{ overflowX: 'scroll', width: '100%', display: 'flex', justifyContent: 'center' }}>
       <Box sx={{ width: '100%' }}>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Typography gutterBottom variant="h5" component="div" align="center" sx={{ pt: 10 }}>
-            Your Saved Movies:
-          </Typography>
-        </Box>
+    
         <Box sx={{ display: 'flex', mt: 2 }}>
           {savedMovies.map((movie) => {
             console.log('movie:', movie);

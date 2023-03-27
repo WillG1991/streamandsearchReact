@@ -2,9 +2,12 @@ import React from 'react';
 import { Typography, Box, Card, CardMedia, CardContent, Button } from '@mui/material';
 import StreamingService from '../StreamingService';
 
+
+
 const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, director, runtime, onSave }) => {
   const poster = posterURLs ? posterURLs['500'] : '';
   const streamingServices = streamingInfo ? Object.keys(streamingInfo) : [];
+
 
   return (
     <Box sx={{ 
@@ -54,11 +57,19 @@ const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, 
         </CardContent>
       </Card>
       <Box sx={{ mt: 3 }}>
-        <Typography variant="h5">Movie Info</Typography>
-        <Typography variant="body1">Genre: {genre}</Typography>
-        <Typography variant="body1">Director: {director}</Typography>
-        <Typography variant="body1">Runtime: {runtime}</Typography>
-      </Box>
+      <Typography variant="h5" fontWeight="bold" align="center" sx={{ mt: 3 }}>
+  Movie Info:
+</Typography>
+  <Typography variant="body1">
+    <strong>Genre:</strong> {genre}
+  </Typography>
+  <Typography variant="body1">
+    <strong>Director:</strong> {director}
+  </Typography>
+  <Typography variant="body1">
+    <strong>Runtime:</strong> {runtime}
+  </Typography>
+</Box>
     </Box>
   );
 };
