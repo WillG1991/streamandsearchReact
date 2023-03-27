@@ -7,6 +7,9 @@ import disneyIcon from "../../assets/img/disney.png"
 import amazonIcon from "../../assets/img/amazon.png"
 import appleIcon from "../../assets/img/apple.png"
 import huluIcon from "../../assets/img/hulu.png"
+import showtimeIcon from "../../assets/img/showtime.png"
+import paramountIcon from "../../assets/img/paramount.png"
+import otherIcon from "../../assets/img/other.png"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,8 +49,12 @@ const StreamingService = ({ name, link }) => {
         return hboIcon;
       case 'hulu':
         return huluIcon;
+        case 'showtime':
+          return showtimeIcon;
+          case 'paramount':
+            return paramountIcon;
       default:
-        return null;
+        return otherIcon;
     }
   };
 

@@ -1,19 +1,30 @@
 import React from 'react';
 import { Typography, Box, Card, CardMedia, CardContent, Button } from '@mui/material';
-import StreamingService from '../StreamingService'; // import the StreamingService component
+import StreamingService from '../StreamingService';
 
 const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, director, runtime, onSave }) => {
-  console.log(onSave);
-  const poster = posterURLs ? posterURLs['500'] : ''; // using 500 size for poster image
+  const poster = posterURLs ? posterURLs['500'] : '';
   const streamingServices = streamingInfo ? Object.keys(streamingInfo) : [];
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <Box sx={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center',
+      maxWidth: '800px',
+      margin: 'auto',
+      padding: '20px',
+      boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.1)',
+      borderRadius: '10px',
+      backgroundColor: '#FFFFFF'
+    }}>
       <Typography variant="h3" sx={{ mt: 3 }}>
         {title}
       </Typography>
-      <Card sx={{ maxWidth: 350, mt: 3 }}>
-        <CardMedia component="img" image={poster} alt={title} />
+      <Card sx={{ maxWidth: 350, mt: 3, borderRadius: '10px', overflow: 'hidden' }}>
+        <Box sx={{ position: 'relative', paddingTop: '150%' }}>
+          <CardMedia component="img" image={poster} alt={title} sx={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} />
+        </Box>
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             {plot}
@@ -24,7 +35,7 @@ const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, 
                 <StreamingService
                   key={service}
                   name={service}
-                  link={streamingInfo[service]["us"].link}
+                  link={streamingInfo[service]['us'].link}
                 />
               ))}
             </Box>

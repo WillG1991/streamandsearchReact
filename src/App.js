@@ -79,9 +79,18 @@ function App() {
 // Define function to save movie to local storage
 const saveMovie = (movie) => {
   console.log('Movie saved:', movie);
-  const updatedSavedMovies = [...savedMovies, movie];
-  setSavedMovies(updatedSavedMovies);
-  localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
+
+// Check for duplicate movies
+const isDuplicate = savedMovies.some((savedMovie) => savedMovie.imdbID === movie.imdbID);
+if (isDuplicate) {
+  // Show a notification to the user that the movie is already in their favorites
+  window.alert('This movie is already on your favorites list.');
+  return;
+}
+
+const updatedSavedMovies = [...savedMovies, movie];
+setSavedMovies(updatedSavedMovies);
+localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
 };
 
 const removeMovie = (movie) => {
@@ -202,6 +211,11 @@ return (
     ) : null}
 
     {/* Render the SavedMovies component */}
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Typography gutterBottom variant="h5" component="div" align="center" sx={{ pt: 10 }}>
+            Your Saved Movies:
+          </Typography>
+        </Box>
     <SavedMovies savedMovies={savedMovies} onRemoveMovie={removeMovie} />
         <Modal    isOpen={isModalOpen}
       onRequestClose={closeModal}
