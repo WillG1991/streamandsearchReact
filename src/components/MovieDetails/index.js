@@ -5,6 +5,8 @@ import StreamingService from '../StreamingService';
 
 
 const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, director, runtime, onSave }) => {
+  console.log('movieInfo props in MovieDetails:', { title, posterURLs, streamingInfo, plot, genre, director, runtime });
+
   const poster = posterURLs ? posterURLs['500'] : '';
   const streamingServices = streamingInfo ? Object.keys(streamingInfo) : [];
 

@@ -12,9 +12,12 @@ import {
 import {Search as SearchIcon,} from '@material-ui/icons';
 import { makeStyles } from "@material-ui/core/styles";
 import MovieDetails from "./components/MovieDetails";
-import SavedMovies from "./components/SavedMovies";
 import Modal from "react-modal";
 import { useMediaQuery } from '@material-ui/core';
+import SavedMoviesSection from "../src/components/SavedMovieSection"
+import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
+import {  Favorite as FavoriteIcon } from '@material-ui/icons';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -65,6 +68,7 @@ function App() {
   const [movieTitle, setMovieTitle] = useState("");
   const [movieInfo, setMovieInfo] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [view, setView] = useState("search");
   const [savedMovies, setSavedMovies] = useState(
     JSON.parse(localStorage.getItem('savedMovies')) || []
   );
@@ -173,45 +177,47 @@ const classes = useStyles();
 
 return (
   <div className={classes.root}>
-    <Box className={classes.section}>
-      <Container>
-        <Grid container justifyContent="center">
-          <Grid item xs={12} md={8}>
-          <Typography variant="h1" align="center" gutterBottom style={searchStreamStyle}>
-  Search & Stream
-</Typography>
-<Typography variant="h4" align="center" gutterBottom style={searchStreamStyles}>
-  You search it, we'll tell you where it streams.
-</Typography>
-            <form onSubmit={handleSubmit}>
-              <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column">
-                <TextField
-                  className={classes.searchInput}
-                  variant="outlined"
-                  placeholder="Enter a movie or TV show title"
-                  onChange={handleChange}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          color="primary"
-                          aria-label="search"
-                          type="submit"
-                        >
-                          <SearchIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    )
-                  }}
-                  style={{ width: "100%" }}
-                />
-              </Box>
-            </form>
+    {view === "search" && (
+      <Box className={classes.section}>
+        <Container>
+          <Grid container justifyContent="center">
+            <Grid item xs={12} md={8}>
+              <Typography variant="h1" align="center" gutterBottom style={searchStreamStyle}>
+                Search & Stream
+              </Typography>
+              <Typography variant="h4" align="center" gutterBottom style={searchStreamStyles}>
+                You search it, we'll tell you where it streams.
+              </Typography>
+              <form onSubmit={handleSubmit}>
+                <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column">
+                  <TextField
+                    className={classes.searchInput}
+                    variant="outlined"
+                    placeholder="Enter a movie or TV show title"
+                    onChange={handleChange}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            color="primary"
+                            aria-label="search"
+                            type="submit"
+                          >
+                            <SearchIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      )
+                    }}
+                    style={{ width: "100%" }}
+                  />
+                </Box>
+              </form>
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
-    </Box>
-    {movieInfo.Title ? (
+        </Container>
+      </Box>
+    )}
+  {movieInfo.Title && view === "search" && (
       <MovieDetails
         title={movieInfo.Title}
         posterURLs={{ 500: movieInfo.Poster }}
@@ -220,20 +226,16 @@ return (
         genre={movieInfo.Genre}
         director={movieInfo.Director}
         runtime={movieInfo.Runtime}
-        onSave={() => saveMovie(movieInfo)} // new prop to save the movie
+        onSave={() => saveMovie(movieInfo)}
       />
-    ) : null}
+    )}
 
-    {/* Render the SavedMovies component */}
-    <br></br>
-    <br></br>
-     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-     <Typography gutterBottom variant="h5" component="div" align="center" sx={{ mt: 5 }}>
-  Your Saved Movies:
-</Typography>
-        </Box>
-    <SavedMovies savedMovies={savedMovies} onRemoveMovie={removeMovie} />
-        <Modal    isOpen={isModalOpen}
+    {view === "favorites" && (
+      <SavedMoviesSection savedMovies={savedMovies} removeMovie={removeMovie} />
+    )}
+
+    <Modal
+      isOpen={isModalOpen}
       onRequestClose={closeModal}
       contentLabel="Movie not found"
       className={classes.smallModal}
@@ -253,6 +255,15 @@ return (
         OK
       </Button>
     </Modal>
+    <BottomNavigation
+      value={view}
+      onChange={(event, newValue) => setView(newValue)}
+      showLabels
+      className={classes.bottomNavigation}
+    >
+      <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} />
+      <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />
+    </BottomNavigation>
   </div>
 );
     };
