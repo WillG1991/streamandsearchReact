@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Box, Card, CardMedia, CardContent, IconButton } from '@mui/material';
+import { Typography, Box, Card, CardMedia, CardContent, IconButton, Chip, Avatar } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import netflixIcon from "../../assets/img/netflix.png"
 import hboIcon from "../../assets/img/hbo.png"
@@ -68,9 +68,10 @@ const SavedMovies = ({ savedMovies, onRemoveMovie }) => {
   alt={movie.Title}
   sx={{
     height: 250,
+    width: "100%",
     objectFit: 'contain',
   }}
-/>                <CardContent sx={{ textAlign: 'center', height: 180 }}>
+/>             <CardContent sx={{ textAlign: 'center', height: 180 }}>
                   <Typography gutterBottom variant="h5" component="div">
                     {movie.Title}
                   </Typography>
@@ -85,22 +86,26 @@ const SavedMovies = ({ savedMovies, onRemoveMovie }) => {
                           Streaming Services:
                         </Typography>
                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 1 }}>
-                          {Object.keys(movie.streamingData).map((streamingService) => {
-                            const icon = getIcon(streamingService);
-                            return (
-                              <Box key={streamingService} sx={{ display: 'flex', alignItems: 'center', gap: 1, textAlign: 'left', mb: 1 }}>
-                                {icon && (
-                                  <img src={icon} alt={streamingService} style={{ width: 30 }} />
-                                )}
-                                <Typography variant="body2">
-                                  <a href={movie.streamingData[streamingService].us.link} target="_blank" rel="noreferrer">
-                                    {streamingService}
-                                  </a>
-                                </Typography>
-                              </Box>
-                            );
-                          })}
-                        </Box>
+  {Object.keys(movie.streamingData).map((streamingService) => {
+    const icon = getIcon(streamingService);
+    return (
+      <Chip
+        key={streamingService}
+        sx={{ mb: 1 }}
+        avatar={icon && (
+          <Avatar sx={{ width: 30, height: 30 }}>
+          <img src={icon} alt={streamingService} style={{ objectFit: 'contain', width: '100%', height: '100%' }} />
+        </Avatar>
+        )}
+        label={(
+          <Typography variant="body2" component="a" href={movie.streamingData[streamingService].us.link} target="_blank" rel="noreferrer">
+            {streamingService}
+          </Typography>
+        )}
+      />
+    );
+  })}
+</Box>
                       </>
                     )}
                   </Box>

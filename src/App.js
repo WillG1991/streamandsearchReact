@@ -65,9 +65,10 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     left: 0,
     right: 0,
+    
   },
   savedMoviesSection: {
-    height: "90vh"
+    height: "80vh"
   },
   
 }));
@@ -89,11 +90,11 @@ function App() {
   const matches = useMediaQuery('(max-width: 600px)');
 
 const searchStreamStyle = {
-  fontSize: matches ? '2rem' : '4rem',
+  fontSize: matches ? '1.5rem' : '4rem',
 };
 
 const searchStreamStyles = {
-  fontSize: matches ? '1rem' : '3rem',
+  fontSize: matches ? '.5rem' : '3rem',
 };
 
  // Retrieve saved movies from local storage when the component mounts
@@ -189,7 +190,7 @@ return (
   <div className={classes.root}>
     {view === "search" && (
       <Box className={classes.section} style={{ maxHeight: '90vh', overflowY: 'auto' }}>
-      <Container>
+        <Container>
           <Grid container justifyContent="center">
             <Grid item xs={12} md={8}>
               <Typography variant="h1" align="center" gutterBottom style={searchStreamStyle}>
@@ -199,27 +200,27 @@ return (
                 You search it, we'll tell you where it streams.
               </Typography>
               <form onSubmit={handleSubmit}>
-                <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column">
-                  <TextField
-                    className={classes.searchInput}
-                    variant="outlined"
-                    placeholder="Enter a movie or TV show title"
-                    onChange={handleChange}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            color="primary"
-                            aria-label="search"
-                            type="submit"
-                          >
-                            <SearchIcon />
-                          </IconButton>
-                        </InputAdornment>
-                      )
-                    }}
-                    style={{ width: "100%" }}
-                  />
+                <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column" >
+                <TextField
+  className={classes.searchInput}
+  variant="outlined"
+  placeholder="Enter a movie or TV show title"
+  onChange={handleChange}
+  InputProps={{
+    endAdornment: (
+      <InputAdornment position="end">
+        <IconButton
+          color="primary"
+          aria-label="search"
+          type="submit"
+        >
+          <SearchIcon />
+        </IconButton>
+      </InputAdornment>
+    )
+  }}
+  style={{ width: "100%", height: "60px" }} // set height property
+/>
                 </Box>
               </form>
             </Grid>
@@ -227,25 +228,31 @@ return (
         </Container>
       </Box>
     )}
+    {movieInfo.Title && view === "search" && (
+      <Box padding={4}>
   {movieInfo.Title && view === "search" && (
-      <MovieDetails
-        title={movieInfo.Title}
-        posterURLs={{ 500: movieInfo.Poster }}
-        streamingInfo={movieInfo.streamingData}
-        plot={movieInfo.Plot}
-        genre={movieInfo.Genre}
-        director={movieInfo.Director}
-        runtime={movieInfo.Runtime}
-        onSave={() => saveMovie(movieInfo)}
-      />
+    <MovieDetails
+      title={movieInfo.Title}
+      posterURLs={{ 500: movieInfo.Poster }}
+      streamingInfo={movieInfo.streamingData}
+      plot={movieInfo.Plot}
+      genre={movieInfo.Genre}
+      director={movieInfo.Director}
+      runtime={movieInfo.Runtime}
+      onSave={() => saveMovie(movieInfo)}
+    />
+  )}
+</Box>
+
     )}
 
     {view === "favorites" && (
       <SavedMoviesSection
-  savedMovies={savedMovies}
-  removeMovie={removeMovie}
-  className={classes.savedMoviesSection}
-/>    )}
+        savedMovies={savedMovies}
+        removeMovie={removeMovie}
+        className={classes.savedMoviesSection}
+      />
+    )}
 
     <Modal
       isOpen={isModalOpen}
@@ -269,15 +276,16 @@ return (
       </Button>
     </Modal>
     <BottomNavigation
-  value={view}
-  onChange={(event, newValue) => setView(newValue)}
-  showLabels
-  className={classes.bottomNavigation}
->
-  <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} />
-  <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />
-</BottomNavigation>
+      value={view}
+      onChange={(event, newValue) => setView(newValue)}
+      showLabels
+      className={classes.bottomNavigation}
+    >
+      <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} />
+      <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />
+    </BottomNavigation>
   </div>
 );
+
     };
 export default App;
