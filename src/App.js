@@ -59,7 +59,17 @@ const useStyles = makeStyles((theme) => ({
     outline: "none",
     borderRadius: 10,
     padding: theme.spacing(2),
-  }
+  },
+  bottomNavigation: {
+    position: 'fixed',
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  savedMoviesSection: {
+    height: "90vh"
+  },
+  
 }));
 
 
@@ -178,8 +188,8 @@ const classes = useStyles();
 return (
   <div className={classes.root}>
     {view === "search" && (
-      <Box className={classes.section}>
-        <Container>
+      <Box className={classes.section} style={{ maxHeight: '90vh', overflowY: 'auto' }}>
+      <Container>
           <Grid container justifyContent="center">
             <Grid item xs={12} md={8}>
               <Typography variant="h1" align="center" gutterBottom style={searchStreamStyle}>
@@ -231,8 +241,11 @@ return (
     )}
 
     {view === "favorites" && (
-      <SavedMoviesSection savedMovies={savedMovies} removeMovie={removeMovie} />
-    )}
+      <SavedMoviesSection
+  savedMovies={savedMovies}
+  removeMovie={removeMovie}
+  className={classes.savedMoviesSection}
+/>    )}
 
     <Modal
       isOpen={isModalOpen}
@@ -256,14 +269,14 @@ return (
       </Button>
     </Modal>
     <BottomNavigation
-      value={view}
-      onChange={(event, newValue) => setView(newValue)}
-      showLabels
-      className={classes.bottomNavigation}
-    >
-      <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} />
-      <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />
-    </BottomNavigation>
+  value={view}
+  onChange={(event, newValue) => setView(newValue)}
+  showLabels
+  className={classes.bottomNavigation}
+>
+  <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} />
+  <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />
+</BottomNavigation>
   </div>
 );
     };

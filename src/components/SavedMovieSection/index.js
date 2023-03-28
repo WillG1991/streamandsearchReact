@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@material-ui/core';
 import SavedMovies from '../SavedMovies';
 
+
 const SavedMoviesSection = ({ savedMovies, removeMovie }) => {
   return (
     <div>

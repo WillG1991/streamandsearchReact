@@ -10,6 +10,16 @@ import huluIcon from "../../assets/img/hulu.png"
 import showtimeIcon from "../../assets/img/showtime.png"
 import paramountIcon from "../../assets/img/paramount.png"
 import otherIcon from "../../assets/img/other.png"
+import { makeStyles } from '@material-ui/core/styles';
+
+
+
+const useStyles = makeStyles((theme) => ({
+  savedMoviesContainer: {
+    height: '80vh', // Adjust this value to your preferred height
+    overflowY: 'auto',
+  },
+}));
 
 const getIcon = (serviceName) => {
   switch (serviceName.toLowerCase()) {
@@ -35,9 +45,12 @@ const getIcon = (serviceName) => {
 };
 
 const SavedMovies = ({ savedMovies, onRemoveMovie }) => {
-  console.log('Saved movies:', savedMovies);
+  const classes = useStyles();
+
 
   return (
+    <div className={classes.savedMoviesContainer}>
+
     <Box sx={{ overflowX: 'scroll', width: '100%', display: 'flex', justifyContent: 'center' }}>
       <Box sx={{ width: '100%' }}>
     
@@ -49,8 +62,15 @@ const SavedMovies = ({ savedMovies, onRemoveMovie }) => {
                 <IconButton onClick={() => onRemoveMovie(movie)}>
                   <Delete />
                 </IconButton>
-                <CardMedia component="img" image={movie.Poster} alt={movie.Title} sx={{ height: 400 }} />
-                <CardContent sx={{ textAlign: 'center', height: 180 }}>
+                <CardMedia
+  component="img"
+  image={movie.Poster}
+  alt={movie.Title}
+  sx={{
+    height: 250,
+    objectFit: 'contain',
+  }}
+/>                <CardContent sx={{ textAlign: 'center', height: 180 }}>
                   <Typography gutterBottom variant="h5" component="div">
                     {movie.Title}
                   </Typography>
@@ -91,6 +111,7 @@ const SavedMovies = ({ savedMovies, onRemoveMovie }) => {
         </Box>
       </Box>
     </Box>
+    </div>
   );
   
 };

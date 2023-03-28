@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Chip } from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles';
 import netflixIcon from "../../assets/img/netflix.png"
 import hboIcon from "../../assets/img/hbo.png"
@@ -17,18 +17,13 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: theme.spacing(1),
-    flexDirection: 'column', // added to center icon and text vertically
-  },
-  icon: {
-    width: 30,
-    height: 30,
-    marginBottom: theme.spacing(0.5), // added to separate icon from text
+    flexDirection: 'column',
   },
   link: {
     textDecoration: 'none',
     color: theme.palette.primary.main,
     fontWeight: 'bold',
-    textAlign: 'center', // added to center the text horizontally
+    textAlign: 'center',
   },
 }));
 
@@ -49,10 +44,10 @@ const StreamingService = ({ name, link }) => {
         return hboIcon;
       case 'hulu':
         return huluIcon;
-        case 'showtime':
-          return showtimeIcon;
-          case 'paramount':
-            return paramountIcon;
+      case 'showtime':
+        return showtimeIcon;
+      case 'paramount':
+        return paramountIcon;
       default:
         return otherIcon;
     }
@@ -63,10 +58,18 @@ const StreamingService = ({ name, link }) => {
   return (
     <div className={classes.root}>
       <a href={link} target="_blank" rel="noreferrer" className={classes.link}>
-        <img src={iconSrc} className={classes.icon} alt={`${name} logo`} />
-        <Typography variant="body1">
-          Available on {name}
-        </Typography>
+        <Chip
+          label={
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <span>Available on</span>
+              <img
+                src={iconSrc}
+                alt={`${name} logo`}
+                style={{ marginLeft: 4, width: 30, height: 30 }}
+              />
+            </div>
+          }
+        />
       </a>
     </div>
   );
