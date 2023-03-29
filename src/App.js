@@ -88,6 +88,7 @@ function App() {
 
 const searchStreamStyle = {
   fontSize: matches ? '1.5rem' : '4rem',
+  fontFamily: 'Arial, sans-serif'
 };
 
 const searchStreamStyles = {
@@ -104,7 +105,6 @@ const searchStreamStyles = {
 
 // Define function to save movie to local storage
 const saveMovie = (movie) => {
-  console.log('Movie saved:', movie);
 
 // Check for duplicate movies
 const isDuplicate = savedMovies.some((savedMovie) => savedMovie.imdbID === movie.imdbID);
@@ -176,13 +176,20 @@ const handleChange = (e) => {
 };
 
 
+
 // Use the custom styles defined above
 const classes = useStyles();
 
 return (
-  <div className={classes.root}>
+<div className={classes.root} style={{ backgroundColor: '#E3F2FD', height: '100vh', width: '100vw' }}>
     {view === "search" && (
-      <Box className={classes.section} style={{ maxHeight: '90vh', overflowY: 'auto' }}>
+      <Box className={classes.section} style={{
+        maxHeight: "90vh",
+        overflowY: "auto",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+      }}>
         <Container>
           <Grid container justifyContent="center">
             <Grid item xs={12} md={8}>
@@ -200,6 +207,7 @@ return (
   placeholder="Enter a movie or TV show title"
   onChange={handleChange}
   InputProps={{
+    style: { backgroundColor: 'rgba(255, 255, 255, 0.7)' },
     endAdornment: (
       <InputAdornment position="end">
         <IconButton
@@ -252,6 +260,7 @@ return (
       onChange={(event, newValue) => setView(newValue)}
       showLabels
       className={classes.bottomNavigation}
+      style={{ backgroundColor: '#E3F2FD' }}
     >
       <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} />
       <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />

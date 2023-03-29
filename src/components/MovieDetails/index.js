@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography, Box, Card, CardMedia, CardContent, Button, IconButton, Backdrop } from '@mui/material';
+import { Typography, Box, Card, CardMedia, CardContent, IconButton, Backdrop } from '@mui/material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import StreamingService from '../StreamingService';
 import StarIcon from '@mui/icons-material/Star';
@@ -7,7 +7,7 @@ import StarIcon from '@mui/icons-material/Star';
 
 
 
-const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, director, runtime, onSave }) => {
+const MovieDetails = ({ title, posterURLs, streamingInfo, plot, genre, director, runtime, onSave }) => {
   const [isSaved, setIsSaved] = useState(false);
 
   const poster = posterURLs ? posterURLs['500'] : '';
@@ -27,7 +27,7 @@ const MovieDetails = ({ title, posterURLs, streamingInfo, tagline, plot, genre, 
 
   return (
 
-<Card sx={{ maxWidth: 300, width: '100%', overflow: 'hidden', position: 'relative', margin: 'auto', paddingTop: 1, paddingBottom: 1 }}>
+<Card sx={{ maxWidth: 300, width: '100%', overflow: 'hidden', position: 'relative', margin: 'auto', paddingTop: 1, paddingBottom: 1, backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
       <Typography variant="h5" sx={{ textAlign: 'center' }}>
   {title}
   <IconButton onClick={handleSave} sx={{ position: 'absolute', top: 0, right: 0 }}>
