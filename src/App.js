@@ -5,14 +5,12 @@ import {
   Typography,
   TextField,
   Box,
-  Button,
   InputAdornment,
   IconButton
 } from '@material-ui/core';
 import {Search as SearchIcon,} from '@material-ui/icons';
 import { makeStyles } from "@material-ui/core/styles";
 import MovieDetails from "./components/MovieDetails";
-import Modal from "react-modal";
 import { useMediaQuery } from '@material-ui/core';
 import SavedMoviesSection from "../src/components/SavedMovieSection"
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
@@ -78,7 +76,6 @@ function App() {
   // Declare state variables for movie title, movie info, and modal open status
   const [movieTitle, setMovieTitle] = useState("");
   const [movieInfo, setMovieInfo] = useState({});
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [view, setView] = useState("search");
   const [savedMovies, setSavedMovies] = useState(
     JSON.parse(localStorage.getItem('savedMovies')) || []
@@ -141,7 +138,7 @@ const searchMovie = async () => {
     console.log('Response:', data); // log the response to the console
 
     if (data.Response === "False") {
-      setIsModalOpen(true);
+      window.alert("Movie not found. Check spelling and please try again!");
     } else {
       const options = {
         method: 'GET',
@@ -178,10 +175,6 @@ const handleChange = (e) => {
   setMovieTitle(e.target.value);
 };
 
-// Define function to close modal
-const closeModal = () => {
-  setIsModalOpen(false);
-};
 
 // Use the custom styles defined above
 const classes = useStyles();
@@ -254,27 +247,6 @@ return (
       />
     )}
 
-    <Modal
-      isOpen={isModalOpen}
-      onRequestClose={closeModal}
-      contentLabel="Movie not found"
-      className={classes.smallModal}
-    >
-      <Typography variant="h2" className={classes.modalTitle}>
-        Movie not found
-      </Typography>
-      <Typography variant="h4" className={classes.modalMessage}>
-        Check spelling and please try again!
-      </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        className={classes.modalButton}
-        onClick={closeModal}
-      >
-        OK
-      </Button>
-    </Modal>
     <BottomNavigation
       value={view}
       onChange={(event, newValue) => setView(newValue)}

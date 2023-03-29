@@ -16,8 +16,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   savedMoviesContainer: {
-    height: '80vh', // Adjust this value to your preferred height
+    height: '80vh', 
     overflowY: 'auto',
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   },
 }));
 
@@ -58,7 +63,7 @@ const SavedMovies = ({ savedMovies, onRemoveMovie }) => {
           {savedMovies.map((movie) => {
             console.log('movie:', movie);
             return (
-              <Card key={movie.title} sx={{ maxWidth: 250, flexShrink: 0, m: 2 }}>
+<Card key={movie.title} sx={{ maxWidth: 250, flexShrink: 0, m: 2, width: "500px" }}>
                 <IconButton onClick={() => onRemoveMovie(movie)}>
                   <Delete />
                 </IconButton>
